@@ -1,33 +1,40 @@
-#include<iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 int main()
 {
-    int n;
-    cin>>n;
-    int total = 0;
-    while(n--)
+    stack<long long> st;
+    map<long long, long long> id;
+    long long n;
+    cin >> n;
+    vector<long long> a(n, 0);
+    for (long long i = 0; i < n; ++i)
     {
-        int tmp;
-        int sum = 0;
-        cin>>tmp;
-        sum += tmp;        
-        cin>>tmp;
-        sum += tmp;
-        if(sum > 1)
-        {
-            total += 1;
-            cin>>tmp;
-            continue;            
-        } 
-        cin>>tmp;
-        sum += tmp;
-        if(sum > 1)
-        {
-            total += 1;
-        }
+        cin >> a[i];
+        id[a[i]] = i;
     }
-    cout<<total;
+    vector<long long> ans(n, 0);
+    ans[0] = 1;
+    st.push(a[0]);
+    for (long long i = 1; i < n; ++i)
+    {           
+        while (st.size() > 0 && a[i] >= st.top())
+            st.pop();
+        if (st.size() == 0)
+            ans[i] = i + 1;
+        else
+        {
+            ans[i] = i - id[st.top()];
+        }
+        st.push(a[i]);
+    }
+
+    for (long long i : ans)
+        cout << i << endl;
+    while(st.size() > 0){
+        cout<<st.top()<<" ";
+        st.pop();
+    }
     return 0;
 }

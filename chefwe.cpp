@@ -1,4 +1,4 @@
-//
+//https://www.codechef.com/AUG20B/problems/CHEFWED
 #include <bits/stdc++.h>
 
 #define mod 1000000007
